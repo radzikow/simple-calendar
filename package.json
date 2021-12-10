@@ -1,19 +1,24 @@
 {
   "name": "simple-calendar",
   "version": "1.0.0",
-  "description": "Simple calendar build in vanilla javascript\"",
-  "main": "index.js",
+  "author": "radzikow",
+  "license": "ISC",
+  "description": "Simple calendar build in vanilla javascript",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "parcel src/index.html",
+    "build": "parcel build src/js/app.js"
   },
   "keywords": [
     "javascript",
     "js",
     "calendar"
   ],
-  "author": "radzikow",
-  "license": "ISC",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.0.1",
+    "parcel": "^2.0.1"
   }
 }

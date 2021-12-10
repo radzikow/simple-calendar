@@ -1,3 +1,6 @@
+import months from '../data/months.js';
+import { changeMonth } from "./calendar-events";
+
 const date = new Date();
 
 const renderCalendar = () => {
@@ -17,7 +20,7 @@ const renderCalendar = () => {
       0)
     .getDate();
 
-  const firstDayIndex = date.getDay();
+  const firstDayIndex = date.getDay() - 1;
 
   const lastDayIndex = new Date(
       date.getFullYear(),
@@ -26,21 +29,6 @@ const renderCalendar = () => {
     .getDay();
 
   const nextDays = 7 - lastDayIndex - 1;
-
-  const months = [
-    'January',
-    'February',
-    'March',
-    'April',
-    'May',
-    'June',
-    'July',
-    'August',
-    'September',
-    'October',
-    'November',
-    'December',
-  ];
 
   document.querySelector('.date h1').innerHTML = months[date.getMonth()];
   document.querySelector('.date p').innerHTML = new Date().toDateString();
@@ -53,7 +41,8 @@ const renderCalendar = () => {
 
   for (let j = 1; j <= lastDay; j++) {
     if (j === new Date().getDate() &&
-      date.getMonth() === new Date().getMonth()) {
+      date.getMonth() === new Date().getMonth() &&
+      date.getFullYear() === new Date().getFullYear()) {
       days += `<div class="today">${j}</div>`;
     } else {
       days += `<div>${j}</div>`;
@@ -67,17 +56,18 @@ const renderCalendar = () => {
   monthDays.innerHTML = days;
 }
 
-const prevMonth = document.getElementById('prevMonth');
-const nextMonth = document.getElementById('nextMonth');
+const prevMonth = document.querySelector('.prevMonth');
+const nextMonth = document.querySelector('.nextMonth');
 
 prevMonth.addEventListener('click', () => {
-  date.setMonth(date.getMonth() - 1);
+  changeMonth(date, 'prev');
   renderCalendar();
 });
-
 nextMonth.addEventListener('click', () => {
-  date.setMonth(date.getMonth() + 1);
+  changeMonth(date, 'next');
   renderCalendar();
 });
 
-renderCalendar();
+export {
+  renderCalendar
+}
